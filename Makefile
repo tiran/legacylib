@@ -20,6 +20,7 @@ MODULES=\
 	sunau \
 	uu \
 	xdrlib \
+	legacytest \
 	$(NULL)
 
 SKIPPED_MODULES=\

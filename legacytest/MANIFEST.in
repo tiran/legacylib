@@ -1,0 +1,5 @@
+include src/legacytest/audiotest.au
+include src/legacytest/Sine-1000Hz-300ms.aif
+graft src/legacytest/audiodata
+graft src/legacytest/imghdrdata
+graft src/legacytest/sndhdrdata
