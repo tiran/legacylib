@@ -9,4 +9,5 @@ setup(
     license="PSFL",
     package_dir={"": "src"},
     py_modules=["asynchat"],
+    install_requires=["asynchat"],
 )
