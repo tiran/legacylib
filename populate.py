@@ -3,7 +3,33 @@ import collections
 import os
 import shutil
 
+from setuptools import setup
+
 Module = collections.namedtuple("Module", "name pyfiles cfiles doc deps")
+
+SETUP_PY = """\
+from setuptools import setup
+
+setup(
+    name="{name}",
+    version="3.7.3",
+    author="CPython",
+    author_email="python-dev@python.org",
+    url="https://www.python.org/",
+    license="PSFL",
+    package_dir={{"": "src"}},
+    py_modules=["{name}"],
+)
+"""
+
+SETUP_CFG = """\
+[bdist_wheel]
+universal = {universal}
+
+[metadata]
+license_file = LICENSE
+"""
+
 
 modules = [
     Module(
@@ -92,7 +118,12 @@ modules = [
     ),
     Module(
         name="msilib",
-        pyfiles=['Lib/msilib/__init__.py', 'Lib/msilib/schema.py', 'Lib/msilib/sequence.py', 'Lib/msilib/text.py'],
+        pyfiles=[
+            "Lib/msilib/__init__.py",
+            "Lib/msilib/schema.py",
+            "Lib/msilib/sequence.py",
+            "Lib/msilib/text.py",
+        ],
         cfiles=["PC/_msi.c"],
         doc="Doc/library/msilib.rst",
         deps=[],
@@ -142,7 +173,7 @@ modules = [
     Module(
         name="spwd",
         pyfiles=[],
-        cfiles=["Modules/spwdmodule.c"],
+        cfiles=["Modules/spwdmodule.c", "Modules/clinic/spwdmodule.c.h"],
         doc="Doc/library/spwd.rst",
         deps=[],
     ),
@@ -169,14 +200,19 @@ for module in modules:
     os.makedirs(f"{module.name}/src", exist_ok=True)
     shutil.copy(f"cpython/LICENSE", f"{module.name}/")
     shutil.copy(f"cpython/{module.doc}", f"{module.name}/README.rst")
+
     if module.name == "msilib":
         os.makedirs("msilib/src/msilib", exist_ok=True)
         shutil.rmtree("msilib/tools", ignore_errors=True)
         # os.makedirs("msilib/tools", exist_ok=True)
         shutil.copytree("cpython/Tools/msi", "msilib/tools")
+
     for pyfile in module.pyfiles:
         target = pyfile.replace("Lib/", "")
         shutil.copy(f"cpython/{pyfile}", f"{module.name}/src/{target}")
+
     for cfile in module.cfiles:
         shutil.copy(f"cpython/{cfile}", f"{module.name}/src/")
 
+    with open(f"{module.name}/setup.cfg", "w") as f:
+        f.write(SETUP_CFG.format(universal=1 if not module.cfiles else 0))
