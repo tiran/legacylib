@@ -5,7 +5,7 @@ import shutil
 
 from setuptools import setup
 
-Module = collections.namedtuple("Module", "name pyfiles cfiles doc deps")
+Module = collections.namedtuple("Module", "name pyfiles cfiles testfiles doc deps")
 
 SETUP_PY = """\
 from setuptools import setup
@@ -36,6 +36,7 @@ modules = [
         name="aifc",
         pyfiles=["Lib/aifc.py"],
         cfiles=[],
+        testfiles=["Lib/test/test_aifc.py"],
         doc="Doc/library/aifc.rst",
         deps=["audioop"],
     ),
@@ -43,6 +44,7 @@ modules = [
         name="asynchat",
         pyfiles=["Lib/asynchat.py"],
         cfiles=[],
+        testfiles=["Lib/test/test_asynchat.py"],
         doc="Doc/library/asynchat.rst",
         deps=["asyncore"],
     ),
@@ -50,6 +52,7 @@ modules = [
         name="asyncore",
         pyfiles=["Lib/asyncore.py"],
         cfiles=[],
+        testfiles=["Lib/test/test_asyncore.py"],
         doc="Doc/library/asyncore.rst",
         deps=[],
     ),
@@ -57,6 +60,7 @@ modules = [
         name="audioop",
         pyfiles=[],
         cfiles=["Modules/audioop.c"],
+        testfiles=["Lib/test/test_audioop.py"],
         doc="Doc/library/audioop.rst",
         deps=[],
     ),
@@ -64,6 +68,7 @@ modules = [
         name="binhex",
         pyfiles=["Lib/binhex.py"],
         cfiles=[],
+        testfiles=["Lib/test/test_binhex.py"],
         doc="Doc/library/binhex.rst",
         deps=[],
     ),
@@ -71,6 +76,7 @@ modules = [
         name="cgi",
         pyfiles=["Lib/cgi.py", "Lib/cgitb.py"],
         cfiles=[],
+        testfiles=["Lib/test/test_cgi.py", "Lib/test/test_cgitb.py"],
         doc="Doc/library/cgi.rst",
         deps=[],
     ),
@@ -78,6 +84,7 @@ modules = [
         name="chunk",
         pyfiles=["Lib/chunk.py"],
         cfiles=[],
+        testfiles=[],  # XXX: no tests
         doc="Doc/library/chunk.rst",
         deps=[],
     ),
@@ -85,6 +92,7 @@ modules = [
         name="colorsys",
         pyfiles=["Lib/colorsys.py"],
         cfiles=[],
+        testfiles=["Lib/test/test_colorsys.py"],
         doc="Doc/library/colorsys.rst",
         deps=[],
     ),
@@ -92,6 +100,7 @@ modules = [
         name="crypt",
         pyfiles=["Lib/crypt.py"],
         cfiles=["Modules/_cryptmodule.c"],
+        testfiles=["Lib/test/test_crypt.py"],
         doc="Doc/library/crypt.rst",
         deps=[],
     ),
@@ -99,6 +108,7 @@ modules = [
         name="fileinput",
         pyfiles=["Lib/fileinput.py"],
         cfiles=[],
+        testfiles=["Lib/test/test_fileinput.py"],
         doc="Doc/library/fileinput.rst",
         deps=[],
     ),
@@ -106,6 +116,7 @@ modules = [
         name="formatter",
         pyfiles=["Lib/formatter.py"],
         cfiles=[],
+        testfiles=[],  # XXX: no tests
         doc="Doc/library/formatter.rst",
         deps=[],
     ),
@@ -113,6 +124,7 @@ modules = [
         name="imghdr",
         pyfiles=["Lib/imghdr.py"],
         cfiles=[],
+        testfiles=["Lib/test/test_imghdr.py"],
         doc="Doc/library/imghdr.rst",
         deps=[],
     ),
@@ -125,6 +137,7 @@ modules = [
             "Lib/msilib/text.py",
         ],
         cfiles=["PC/_msi.c"],
+        testfiles=["Lib/test/test_msilib.py"],
         doc="Doc/library/msilib.rst",
         deps=[],
     ),
@@ -132,6 +145,7 @@ modules = [
         name="nis",
         pyfiles=[],
         cfiles=["Modules/nismodule.c"],
+        testfiles=["Lib/test/test_nis.py"],
         doc="Doc/library/nis.rst",
         deps=[],
     ),
@@ -139,6 +153,7 @@ modules = [
         name="nntplib",
         pyfiles=["Lib/nntplib.py"],
         cfiles=[],
+        testfiles=["Lib/test/test_nntplib.py"],
         doc="Doc/library/nntplib.rst",
         deps=[],
     ),
@@ -146,6 +161,7 @@ modules = [
         name="ossaudiodev",
         pyfiles=[],
         cfiles=["Modules/ossaudiodev.c"],
+        testfiles=["Lib/test/test_ossaudiodev.py"],
         doc="Doc/library/ossaudiodev.rst",
         deps=[],
     ),
@@ -153,6 +169,7 @@ modules = [
         name="pipes",
         pyfiles=["Lib/pipes.py"],
         cfiles=[],
+        testfiles=["Lib/test/test_pipes.py"],
         doc="Doc/library/pipes.rst",
         deps=[],
     ),
@@ -160,6 +177,7 @@ modules = [
         name="smtpd",
         pyfiles=["Lib/smtpd.py"],
         cfiles=[],
+        testfiles=["Lib/test/test_smtpd.py"],
         doc="Doc/library/smtpd.rst",
         deps=[],
     ),
@@ -167,6 +185,7 @@ modules = [
         name="sndhdr",
         pyfiles=["Lib/sndhdr.py"],
         cfiles=[],
+        testfiles=["Lib/test/test_sndhdr.py"],
         doc="Doc/library/sndhdr.rst",
         deps=[],
     ),
@@ -174,6 +193,7 @@ modules = [
         name="spwd",
         pyfiles=[],
         cfiles=["Modules/spwdmodule.c", "Modules/clinic/spwdmodule.c.h"],
+        testfiles=["Lib/test/test_spwd.py"],
         doc="Doc/library/spwd.rst",
         deps=[],
     ),
@@ -182,15 +202,22 @@ modules = [
         pyfiles=["Lib/sunau.py"],
         cfiles=[],
         doc="Doc/library/sunau.rst",
+        testfiles=["Lib/test/test_sunau.py"],
         deps=["audioop"],
     ),
     Module(
-        name="uu", pyfiles=["Lib/uu.py"], cfiles=[], doc="Doc/library/uu.rst", deps=[]
+        name="uu",
+        pyfiles=["Lib/uu.py"],
+        cfiles=[],
+        doc="Doc/library/uu.rst",
+        testfiles=["Lib/test/test_uu.py"],
+        deps=[],
     ),
     Module(
         name="xdrlib",
         pyfiles=["Lib/xdrlib.py"],
         cfiles=[],
+        testfiles=["Lib/test/test_xdrlib.py"],
         doc="Doc/library/xdrlib.rst",
         deps=[],
     ),
@@ -213,6 +240,12 @@ for module in modules:
 
     for cfile in module.cfiles:
         shutil.copy(f"cpython/{cfile}", f"{module.name}/src/")
+
+    if len(module.testfiles) == 1:
+        shutil.copy(f"cpython/{module.testfiles[0]}", f"{module.name}/tests.py")
+    else:
+        for testfile in module.testfiles:
+            shutil.copy(f"cpython/{testfile}", f"{module.name}")
 
     with open(f"{module.name}/setup.cfg", "w") as f:
         f.write(SETUP_CFG.format(universal=1 if not module.cfiles else 0))
