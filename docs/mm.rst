@@ -15,7 +15,6 @@ discretion of the installation.  Here's an overview:
    aifc.rst
    sunau.rst
    chunk.rst
-   colorsys.rst
    imghdr.rst
    sndhdr.rst
    ossaudiodev.rst

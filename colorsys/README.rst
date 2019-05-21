@@ -1,1 +1,0 @@
-../docs/colorsys.rst

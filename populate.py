@@ -97,14 +97,6 @@ modules = [
         deps=[],
     ),
     Module(
-        name="colorsys",
-        pyfiles=["Lib/colorsys.py"],
-        cfiles=[],
-        testfiles=["Lib/test/test_colorsys.py"],
-        doc="Doc/library/colorsys.rst",
-        deps=[],
-    ),
-    Module(
         name="crypt",
         pyfiles=["Lib/crypt.py"],
         cfiles=["Modules/_cryptmodule.c"],

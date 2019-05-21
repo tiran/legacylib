@@ -9,7 +9,6 @@ MODULES=\
 	cgi \
 	cgitb \
 	chunk \
-	colorsys \
 	crypt \
 	fileinput \
 	formatter \
