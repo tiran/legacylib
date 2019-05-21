@@ -74,11 +74,19 @@ modules = [
     ),
     Module(
         name="cgi",
-        pyfiles=["Lib/cgi.py", "Lib/cgitb.py"],
+        pyfiles=["Lib/cgi.py"],
         cfiles=[],
-        testfiles=["Lib/test/test_cgi.py", "Lib/test/test_cgitb.py"],
+        testfiles=["Lib/test/test_cgi.py"],
         doc="Doc/library/cgi.rst",
         deps=[],
+    ),
+    Module(
+        name="cgitb",
+        pyfiles=["Lib/cgitb.py"],
+        cfiles=[],
+        testfiles=["Lib/test/test_cgitb.py"],
+        doc="Doc/library/cgitb.rst",
+        deps=["cgi"],
     ),
     Module(
         name="chunk",

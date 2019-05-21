@@ -6,6 +6,7 @@ MODULES=\
 	audioop \
 	binhex \
 	cgi \
+	cgitb \
 	chunk \
 	colorsys \
 	crypt \

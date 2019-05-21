@@ -8,5 +8,6 @@ setup(
     url="https://www.python.org/",
     license="PSFL",
     package_dir={"": "src"},
-    py_modules=["cgi"],
+    py_modules=["cgitb"],
+    install_requires=["cgi"],
 )
