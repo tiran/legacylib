@@ -10,4 +10,5 @@ setup(
     package_dir={"": "src"},
     py_modules=["aifc"],
     install_requires=["audioop"],
+    tests_require=["legacytest"],
 )
