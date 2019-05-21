@@ -14,6 +14,7 @@ MODULES=\
 	formatter \
 	imghdr \
 	msilib \
+	nis \
 	nntplib \
 	pipes \
 	smtpd \
@@ -25,7 +26,6 @@ MODULES=\
 	$(NULL)
 
 SKIPPED_MODULES=\
-	nis \
 	ossaudiodev \
 	spwd \
 	$(NULL)
