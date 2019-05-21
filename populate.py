@@ -240,11 +240,13 @@ modules = [
     ),
 ]
 
+
 for module in modules:
     os.makedirs(f"{module.name}/src", exist_ok=True)
     shutil.copy(f"cpython/LICENSE", f"{module.name}/")
     if module.doc is not None:
-        shutil.copy(f"cpython/{module.doc}", f"{module.name}/README.rst")
+        shutil.copy(f"cpython/{module.doc}", "docs/")
+        # shutil.copy(f"cpython/{module.doc}", f"{module.name}/README.rst")
 
     if module.name == "msilib":
         os.makedirs("msilib/src/msilib", exist_ok=True)
@@ -267,3 +269,6 @@ for module in modules:
 
     with open(f"{module.name}/setup.cfg", "w") as f:
         f.write(SETUP_CFG.format(universal=1 if not module.cfiles else 0))
+
+for sphinxext in ['suspicious', 'pyspecific']:
+    shutil.copy(f"cpython/Doc/tools/extensions/{sphinxext}.py", "docs/")

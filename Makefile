@@ -33,7 +33,9 @@ SKIPPED_MODULES=\
 	$(NULL)
 
 .PHONY=all
-all: $(MODULES)
+all: $(MODULES) docs
+
+FORCE:
 
 $(MODULES): dist FORCE
 	rm -f $(CURDIR)/dist/$@*
@@ -41,13 +43,14 @@ $(MODULES): dist FORCE
 	cd $@; $(PYTHON) setup.py sdist -d $(CURDIR)/dist/
 	cd $@; $(PYTHON) setup.py bdist_wheel -d $(CURDIR)/dist/
 
-FORCE:
-
 dist:
 	mkdir $@
+
+docs: FORCE
+	$(MAKE) -C docs html
 
 .PHONY=clean
 clean:
 	rm -rf $(CURDIR)/dist
-	find $(CURDIR) -name build -and -type d | xargs rm -rf
+	rm -rf $(CURDIR)/*/build
 	find $(CURDIR) -name __pycache__ -and -type d | xargs rm -rf
