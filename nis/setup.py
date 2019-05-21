@@ -51,7 +51,7 @@ class NISBuildExt(build_ext):
 
 setup(
     name="nis",
-    version="3.7.3",
+    version="3.8.0a4",
     author="CPython",
     author_email="python-dev@python.org",
     url="https://www.python.org/",

@@ -24,9 +24,9 @@ copyright = u'2019, Christian Heimes, Python Core Development'
 author = u'Christian Heimes, Python Core Development'
 
 # The short X.Y version
-version = u''
+version = u'3.8.0a4'
 # The full version, including alpha/beta/rc tags
-release = u''
+release = u'3.8.0a4'
 
 
 # -- General configuration ---------------------------------------------------
