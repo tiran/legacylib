@@ -17,9 +17,11 @@ MODULES=\
 	msilib \
 	nis \
 	nntplib \
+	ossaudiodev \
 	pipes \
 	smtpd \
 	sndhdr \
+	spwd \
 	sunau \
 	uu \
 	xdrlib \
@@ -27,8 +29,7 @@ MODULES=\
 	$(NULL)
 
 SKIPPED_MODULES=\
-	ossaudiodev \
-	spwd \
+	msilib \
 	$(NULL)
 
 .PHONY=all
