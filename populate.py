@@ -245,8 +245,13 @@ for module in modules:
     os.makedirs(f"{module.name}/src", exist_ok=True)
     shutil.copy(f"cpython/LICENSE", f"{module.name}/")
     if module.doc is not None:
-        shutil.copy(f"cpython/{module.doc}", "docs/")
-        # shutil.copy(f"cpython/{module.doc}", f"{module.name}/README.rst")
+        basename = os.path.basename(module.doc)
+        shutil.copy(f"cpython/{module.doc}", f"docs/{basename}")
+        try:
+            os.unlink(f"{module.name}/README.rst")
+        except FileNotFoundError:
+            pass
+        os.symlink(f"../docs/{basename}", f"{module.name}/README.rst")
 
     if module.name == "msilib":
         os.makedirs("msilib/src/msilib", exist_ok=True)

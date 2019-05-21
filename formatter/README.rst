@@ -1,0 +1,1 @@
+../docs/formatter.rst

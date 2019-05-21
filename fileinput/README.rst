@@ -1,0 +1,1 @@
+../docs/fileinput.rst
