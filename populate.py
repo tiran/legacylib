@@ -3,22 +3,30 @@ import collections
 import os
 import shutil
 
-from setuptools import setup
-
-Module = collections.namedtuple("Module", "name pyfiles cfiles testfiles doc deps")
+Module = collections.namedtuple(
+    "Module",
+    "name pyfiles cfiles testfiles doc install_requires tests_require"
+)
 
 SETUP_PY = """\
 from setuptools import setup
 
 setup(
     name="{name}",
-    version="3.7.3",
+    version="3.10.0a1",
     author="CPython",
     author_email="python-dev@python.org",
     url="https://www.python.org/",
-    license="PSFL",
+    license="PSF license"
     package_dir={{"": "src"}},
-    py_modules=["{name}"],
+    {extra}
+    classifiers=[
+        "Development Status :: 7 - Inactive",
+        "License :: OSI Approved :: Python Software Foundation License",
+        "Natural Language :: English",
+        "Programming Language :: Python",
+        "Topic :: Software Development",
+    ],
 )
 """
 
@@ -38,7 +46,8 @@ modules = [
         cfiles=[],
         testfiles=["Lib/test/test_aifc.py"],
         doc="Doc/library/aifc.rst",
-        deps=["audioop"],
+        install_requires=["audioop"],
+        tests_require=["legacytest"],
     ),
     Module(
         name="asynchat",
@@ -46,7 +55,8 @@ modules = [
         cfiles=[],
         testfiles=["Lib/test/test_asynchat.py"],
         doc="Doc/library/asynchat.rst",
-        deps=["asyncore"],
+        install_requires=["asyncore"],
+        tests_require=[],
     ),
     Module(
         name="asyncore",
@@ -54,7 +64,8 @@ modules = [
         cfiles=[],
         testfiles=["Lib/test/test_asyncore.py"],
         doc="Doc/library/asyncore.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     Module(
         name="audioop",
@@ -62,7 +73,8 @@ modules = [
         cfiles=["Modules/audioop.c"],
         testfiles=["Lib/test/test_audioop.py"],
         doc="Doc/library/audioop.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     Module(
         name="binhex",
@@ -70,7 +82,8 @@ modules = [
         cfiles=[],
         testfiles=["Lib/test/test_binhex.py"],
         doc="Doc/library/binhex.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     Module(
         name="cgi",
@@ -78,7 +91,8 @@ modules = [
         cfiles=[],
         testfiles=["Lib/test/test_cgi.py"],
         doc="Doc/library/cgi.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     Module(
         name="cgitb",
@@ -86,7 +100,8 @@ modules = [
         cfiles=[],
         testfiles=["Lib/test/test_cgitb.py"],
         doc="Doc/library/cgitb.rst",
-        deps=["cgi"],
+        install_requires=["cgi"],
+        tests_require=[],
     ),
     Module(
         name="chunk",
@@ -94,7 +109,8 @@ modules = [
         cfiles=[],
         testfiles=[],  # XXX: no tests
         doc="Doc/library/chunk.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     Module(
         name="crypt",
@@ -102,7 +118,8 @@ modules = [
         cfiles=["Modules/_cryptmodule.c"],
         testfiles=["Lib/test/test_crypt.py"],
         doc="Doc/library/crypt.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     Module(
         name="fileinput",
@@ -110,7 +127,8 @@ modules = [
         cfiles=[],
         testfiles=["Lib/test/test_fileinput.py"],
         doc="Doc/library/fileinput.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     Module(
         name="formatter",
@@ -118,7 +136,8 @@ modules = [
         cfiles=[],
         testfiles=[],  # XXX: no tests
         doc="Doc/library/formatter.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     Module(
         name="imghdr",
@@ -126,7 +145,8 @@ modules = [
         cfiles=[],
         testfiles=["Lib/test/test_imghdr.py"],
         doc="Doc/library/imghdr.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     Module(
         name="msilib",
@@ -139,7 +159,8 @@ modules = [
         cfiles=["PC/_msi.c"],
         testfiles=["Lib/test/test_msilib.py"],
         doc="Doc/library/msilib.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     Module(
         name="nis",
@@ -147,7 +168,8 @@ modules = [
         cfiles=["Modules/nismodule.c"],
         testfiles=["Lib/test/test_nis.py"],
         doc="Doc/library/nis.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     Module(
         name="nntplib",
@@ -155,7 +177,8 @@ modules = [
         cfiles=[],
         testfiles=["Lib/test/test_nntplib.py"],
         doc="Doc/library/nntplib.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     Module(
         name="ossaudiodev",
@@ -163,7 +186,8 @@ modules = [
         cfiles=["Modules/ossaudiodev.c"],
         testfiles=["Lib/test/test_ossaudiodev.py"],
         doc="Doc/library/ossaudiodev.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     Module(
         name="pipes",
@@ -171,7 +195,8 @@ modules = [
         cfiles=[],
         testfiles=["Lib/test/test_pipes.py"],
         doc="Doc/library/pipes.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     Module(
         name="smtpd",
@@ -179,7 +204,8 @@ modules = [
         cfiles=[],
         testfiles=["Lib/test/test_smtpd.py"],
         doc="Doc/library/smtpd.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=["legacytest"],
     ),
     Module(
         name="sndhdr",
@@ -187,7 +213,8 @@ modules = [
         cfiles=[],
         testfiles=["Lib/test/test_sndhdr.py"],
         doc="Doc/library/sndhdr.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=["legacytest"],
     ),
     Module(
         name="spwd",
@@ -195,7 +222,8 @@ modules = [
         cfiles=["Modules/spwdmodule.c", "Modules/clinic/spwdmodule.c.h"],
         testfiles=["Lib/test/test_spwd.py"],
         doc="Doc/library/spwd.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     Module(
         name="sunau",
@@ -203,7 +231,8 @@ modules = [
         cfiles=[],
         doc="Doc/library/sunau.rst",
         testfiles=["Lib/test/test_sunau.py"],
-        deps=["audioop"],
+        install_requires=["audioop"],
+        tests_require=["legacytest"],
     ),
     Module(
         name="uu",
@@ -211,7 +240,8 @@ modules = [
         cfiles=[],
         doc="Doc/library/uu.rst",
         testfiles=["Lib/test/test_uu.py"],
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     Module(
         name="xdrlib",
@@ -219,7 +249,8 @@ modules = [
         cfiles=[],
         testfiles=["Lib/test/test_xdrlib.py"],
         doc="Doc/library/xdrlib.rst",
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
     # TODO: test data module
     Module(
@@ -228,7 +259,8 @@ modules = [
         cfiles=[],
         testfiles=[],
         doc=None,
-        deps=[],
+        install_requires=[],
+        tests_require=[],
     ),
 ]
 
